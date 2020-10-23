@@ -1,7 +1,9 @@
 #!/bin/bash
 
-if [ ! -f /root/.sonos-web/ ]; then
+if [ ! -f ./app/ ]; then
     sonos-web install
+    mkdir -p app
+    mv /root/.sonos-web/* ./app
 fi
 
-sonos-web start && : >> log.log && tail -f log.log
+cd app && node src/server.js
